@@ -1,6 +1,6 @@
 # 傳真管理系統(Fax Management System)
 ## 系統需求
-- 使用C# ASP.NET Core Net 8開發，不另外使用前端框架
+- 使用C# ASP.NET MVC Core Net 8開發，不另外使用前端框架
 - 使用Entity Framework Core作為ORM框架，本機開發時使用SQLite作為資料庫，正式環境使用SQL Server作為資料庫
 - 使用Hangfire進行排程任務管理
 - 使用Swagger進行API文件生成
