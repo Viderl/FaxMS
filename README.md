@@ -1,6 +1,6 @@
 # 傳真管理系統(Fax Management System)
 ## 系統需求
-- 使用C# ASP.NET Core Net 8開發，不另外使用前端框架
+- 使用C# ASP.NET MVC Core Net 8開發，不另外使用前端框架
 - 使用Entity Framework Core作為ORM框架，本機開發時使用SQLite作為資料庫，正式環境使用SQL Server作為資料庫
 - 使用Hangfire進行排程任務管理
 - 使用Swagger進行API文件生成
@@ -65,10 +65,10 @@
 ```
 - 部門透過API取得，無特殊驗證方式。URL:https://api-test.tmnewa.com.tw/ebp/common/!Partner/TMNewa.Mis.Partner.Service.AIOuterService.svc/json/GetTMNewaDepartment
 ## 介面
-1. 登入畫面。帳號透過LDAP查詢帳號是否存在，並使用AD驗證登入。使用Razor page，Controller直接呼叫資料庫，不需要透過API。
-2. 紀錄查詢介面，支援條件搜尋，搜尋條件有傳真號碼、傳真時間。允許使用者傳真PDF檔案和查看傳真記錄。登入後預設到此畫面。所有人都可以開啟此介面。管理員允許查看所有傳真紀錄，其他人只能查看自己的傳真紀錄。使用Razor page，Controller直接呼叫資料庫，不需要透過API。
-3. 來源系統管理介面。設定來源系統和IP，一個系統可能會有多個IP。只有管理員可以開啟此介面。使用Razor page，Controller直接呼叫資料庫，不需要透過API。
-4. 管理員管理介面。編輯管理員帳號。只有管理員可以開啟此介面。使用Razor page，Controller直接呼叫資料庫，不需要透過API。
+1. 登入畫面。帳號透過LDAP查詢帳號是否存在，並使用AD驗證登入。Controller直接呼叫資料庫，不需要透過API。
+2. 紀錄查詢介面，支援條件搜尋，搜尋條件有傳真號碼、傳真時間。允許使用者傳真PDF檔案和查看傳真記錄。登入後預設到此畫面。所有人都可以開啟此介面。管理員允許查看所有傳真紀錄，其他人只能查看自己的傳真紀錄。Controller直接呼叫資料庫，不需要透過API。
+3. 來源系統管理介面。設定來源系統和IP，一個系統可能會有多個IP。只有管理員可以開啟此介面。Controller直接呼叫資料庫，不需要透過API。
+4. 管理員管理介面。編輯管理員帳號。只有管理員可以開啟此介面。Controller直接呼叫資料庫，不需要透過API。
 ## API
 - 只需要接收傳真API。接收參數如下。API收到PDF檔，將PDF放到兩個地方，一個是傳真APP處理的資料夾，此資料夾路徑固定，寫在config。另一個是管理系統本身使用的資料夾，用以調閱。資料夾用寫在config內的一個固定路徑加上/yyyy/mm/dd格式儲存，PDF檔名格式yyyymmddHHmmssffff。
     1. pdf檔案，必填，大小不超過3MB
