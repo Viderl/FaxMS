@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "傳真上傳";
+}
+<h2>傳真上傳</h2>
+@if (ViewBag.Message != null)
+{
+    <div style="color:green">@ViewBag.Message</div>
+}
+<form asp-action="UploadFax" method="post" enctype="multipart/form-data">
+    <div>
+        <label>傳真號碼</label>
+        <input type="text" name="faxNumber" />
+    </div>
+    <div>
+        <label>險種</label>
+        <select name="insurenceType">
+            <option value="">請選擇</option>
+            <option value="A">傷害險</option>
+            <option value="B">商火</option>
+            <option value="C">車險</option>
+            <option value="F">住火</option>
+            <option value="H">健康險</option>
+            <option value="M">水險</option>
+            <option value="O">新種險</option>
+        </select>
+    </div>
+    <div>
+        <label>部門</label>
+        <input type="text" name="department" />
+    </div>
+    <div>
+        <label>PDF檔案</label>
+        <input type="file" name="pdfFile" accept="application/pdf" />
+    </div>
+    <button type="submit">上傳</button>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div style="color:red">@ViewData.ModelState[string.Empty]?.Errors.FirstOrDefault()?.ErrorMessage</div>
+    }
+</form>

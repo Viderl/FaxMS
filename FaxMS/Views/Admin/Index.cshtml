@@ -1,0 +1,34 @@
+@model IEnumerable<FaxMS.Models.Admin>
+@{
+    ViewData["Title"] = "管理員管理";
+}
+<h2>管理員管理</h2>
+<a asp-action="Create">新增管理員</a>
+<table border="1">
+    <tr>
+        <th>帳號</th>
+        <th>啟用</th>
+        <th>建立時間</th>
+        <th>建立帳號</th>
+        <th>修改時間</th>
+        <th>修改帳號</th>
+        <th>操作</th>
+    </tr>
+    @foreach (var admin in Model)
+    {
+        <tr>
+            <td>@admin.Account</td>
+            <td>@(admin.IsActive ? "啟用" : "停用")</td>
+            <td>@admin.CreatedAt</td>
+            <td>@admin.CreatedBy</td>
+            <td>@admin.UpdatedAt</td>
+            <td>@admin.UpdatedBy</td>
+            <td>
+                <form asp-action="ToggleActive" method="post" style="display:inline">
+                    <input type="hidden" name="id" value="@admin.Id" />
+                    <button type="submit">@(admin.IsActive ? "停用" : "啟用")</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

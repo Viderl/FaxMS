@@ -1,0 +1,32 @@
+@model IEnumerable<FaxMS.Models.SourceSystem>
+@{
+    ViewData["Title"] = "來源系統管理";
+}
+<h2>來源系統管理</h2>
+<a asp-action="Create">新增來源系統</a>
+<table border="1">
+    <tr>
+        <th>名稱</th>
+        <th>IP清單</th>
+        <th>建立時間</th>
+        <th>建立帳號</th>
+        <th>操作</th>
+    </tr>
+    @foreach (var sys in Model)
+    {
+        <tr>
+            <td>@sys.Name</td>
+            <td>
+                @foreach (var ip in sys.IPs)
+                {
+                    <div>@ip.IP</div>
+                }
+            </td>
+            <td>@sys.CreatedAt</td>
+            <td>@sys.CreatedBy</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@sys.Id">編輯</a>
+            </td>
+        </tr>
+    }
+</table>

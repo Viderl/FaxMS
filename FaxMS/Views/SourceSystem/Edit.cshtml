@@ -1,0 +1,33 @@
+@model FaxMS.Models.SourceSystem
+@{
+    ViewData["Title"] = "編輯來源系統";
+}
+<h2>編輯來源系統 - @Model.Name</h2>
+@if (TempData["Error"] != null)
+{
+    <div style="color:red">@TempData["Error"]</div>
+}
+<h3>IP清單</h3>
+<table border="1">
+    <tr><th>IP</th><th>操作</th></tr>
+    @foreach (var ip in Model.IPs)
+    {
+        <tr>
+            <td>@ip.IP</td>
+            <td>
+                <form asp-action="DeleteIP" method="post" style="display:inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="ipId" value="@ip.Id" />
+                    <button type="submit">刪除</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<h3>新增IP</h3>
+<form asp-action="AddIP" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="text" name="ip" placeholder="請輸入IP" />
+    <button type="submit">新增IP</button>
+</form>
+<a asp-action="Index">返回</a>

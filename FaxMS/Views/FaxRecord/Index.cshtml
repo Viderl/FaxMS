@@ -1,0 +1,49 @@
+@model IEnumerable<FaxMS.Models.FaxRecord>
+@{
+    ViewData["Title"] = "傳真紀錄查詢";
+}
+<h2>傳真紀錄查詢</h2>
+<form method="get">
+    <label>傳真號碼</label>
+    <input type="text" name="faxNumber" value="@Request.Query["faxNumber"]" />
+    <label>傳真時間(起)</label>
+    <input type="date" name="faxTimeFrom" value="@Request.Query["faxTimeFrom"]" />
+    <label>傳真時間(迄)</label>
+    <input type="date" name="faxTimeTo" value="@Request.Query["faxTimeTo"]" />
+    <button type="submit">查詢</button>
+</form>
+<table border="1">
+    <tr>
+        <th>傳真號碼</th>
+        <th>傳真時間</th>
+        <th>檔案名稱</th>
+        <th>來源系統</th>
+        <th>來源IP</th>
+        <th>險種</th>
+        <th>部門</th>
+        <th>帳號</th>
+        <th>操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FaxNumber</td>
+            <td>@item.FaxTime</td>
+            <td>@item.FileName</td>
+            <td>@item.SourceSystem</td>
+            <td>@item.SourceIP</td>
+            <td>@item.InsurenceType</td>
+            <td>@item.Department</td>
+            <td>@item.Account</td>
+            <td>
+                <a asp-action="Download" asp-route-id="@item.Id">下載</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline" onsubmit="return confirm('確定要刪除?');">
+                        <button type="submit">刪除</button>
+                    </form>
+                }
+            </td>
+        </tr>
+    }
+</table>
